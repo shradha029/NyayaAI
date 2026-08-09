@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NyayaAI — Understand your rights. Know your next step.</title>
+<meta name="description" content="NyayaAI is an AI-powered assistant that helps you understand general Indian legal information in simple language and discover possible next steps." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav-wrap">
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 4V44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M9 10L39 10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M9 10L4 22C4 26 8 28 9 28C10 28 14 26 14 22L9 10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M39 10L34 22C34 26 38 28 39 28C40 28 44 26 44 22L39 10Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M17 44H31" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M24 38V44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      NyayaAI
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#top">Home</a></li>
+      <li><a href="#categories">Legal Categories</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">AI-powered · Indian legal context</p>
+      <h1 class="hero-title">Your AI Legal <em>Information</em> Assistant</h1>
+      <p class="hero-sub">Understand Indian legal information in simple language and discover possible next steps — before you decide what to do.</p>
+      <div class="hero-actions">
+        <a href="#ask" class="btn btn-primary">Ask NyayaAI</a>
+        <a href="#categories" class="btn btn-secondary">Explore Legal Rights</a>
+      </div>
+      <p class="hero-note">⚖️ General legal information only — not a substitute for professional legal advice.</p>
+    </div>
+    <div class="hero-scales" aria-hidden="true">
+      <svg viewBox="0 0 320 260" class="scales-svg">
+        <line x1="160" y1="10" x2="160" y2="230" class="scale-post" />
+        <circle cx="160" cy="16" r="6" class="scale-cap" />
+        <g class="beam">
+          <line x1="60" y1="46" x2="260" y2="46" class="scale-post" />
+          <line x1="60" y1="46" x2="60" y2="96" class="scale-chain" />
+          <line x1="260" y1="46" x2="260" y2="96" class="scale-chain" />
+          <path d="M30 96 Q60 140 90 96 Z" class="scale-pan pan-left" />
+          <path d="M230 96 Q260 140 290 96 Z" class="scale-pan pan-right" />
+        </g>
+        <path d="M120 230 L200 230 L185 250 L135 250 Z" class="scale-base" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ ASK NYAYAAI ============ -->
+  <section class="ask-section" id="ask">
+    <div class="section-head">
+      <p class="eyebrow">Ask your legal question</p>
+      <h2>Describe your situation. NyayaAI will explain it.</h2>
+    </div>
+
+    <div class="ask-card">
+      <label for="questionInput" class="ask-label">Describe your situation in your own words…</label>
+      <textarea id="questionInput" class="ask-textarea" rows="5" maxlength="1500"
+        placeholder="e.g. My landlord is refusing to return my security deposit even though I gave one month's notice…"></textarea>
+      <div class="ask-meta">
+        <span id="charCount">0 / 1500</span>
+      </div>
+
+      <div class="examples">
+        <button type="button" class="example-chip">My landlord is refusing to return my security deposit. What can I do?</button>
+        <button type="button" class="example-chip">My employer has not paid my salary for two months.</button>
+        <button type="button" class="example-chip">I bought a defective product and the seller refuses to refund me.</button>
+        <button type="button" class="example-chip">What are my rights if I am stopped by the police?</button>
+      </div>
+
+      <button id="askBtn" class="btn btn-primary btn-full">Get Legal Guidance</button>
+
+      <div id="statusArea" class="status-area" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <span id="statusText">Analyzing your question…</span>
+      </div>
+
+      <div id="errorArea" class="error-area" role="alert" hidden></div>
+    </div>
+
+    <div id="responseArea" class="response-area" hidden></div>
+  </section>
+
+  <!-- ============ LEGAL CATEGORIES ============ -->
+  <section class="categories" id="categories">
+    <div class="section-head">
+      <p class="eyebrow">Browse by topic</p>
+      <h2>Legal Categories</h2>
+      <p class="section-sub">Tap a category to load an example question, or use it as a starting point for your own.</p>
+    </div>
+
+    <div class="category-grid">
+      <button class="category-card" data-question="My landlord is refusing to return my security deposit even though I've vacated the flat. What can I do?">
+        <span class="cat-icon">🏠</span>
+        <span class="cat-title">Property &amp; Rent</span>
+        <span class="cat-desc">Tenancy, deposits, eviction, landlord disputes</span>
+      </button>
+      <button class="category-card" data-question="My employer has not paid my salary for the last two months and is not responding to my messages.">
+        <span class="cat-icon">👷</span>
+        <span class="cat-title">Employment</span>
+        <span class="cat-desc">Wages, termination, workplace disputes</span>
+      </button>
+      <button class="category-card" data-question="I bought a defective product online and the seller is refusing to refund or replace it.">
+        <span class="cat-icon">🛒</span>
+        <span class="cat-title">Consumer Rights</span>
+        <span class="cat-desc">Refunds, defective goods, service issues</span>
+      </button>
+      <button class="category-card" data-question="I am facing harassment and want to understand what legal protections and options are available to me as a woman.">
+        <span class="cat-icon">👩</span>
+        <span class="cat-title">Women's Rights</span>
+        <span class="cat-desc">Safety, harassment, protection laws</span>
+      </button>
+      <button class="category-card" data-question="I was stopped by traffic police and asked to pay a fine on the spot. What are my rights in this situation?">
+        <span class="cat-icon">🚗</span>
+        <span class="cat-title">Traffic &amp; Motor Vehicles</span>
+        <span class="cat-desc">Fines, licenses, accidents, challans</span>
+      </button>
+      <button class="category-card" data-question="Money was deducted from my bank account for a transaction I never made. What should I do?">
+        <span class="cat-icon">💰</span>
+        <span class="cat-title">Banking &amp; Financial</span>
+        <span class="cat-desc">Fraud, loans, disputed transactions</span>
+      </button>
+      <button class="category-card" data-question="I need to understand the general process for a mutual consent divorce in India.">
+        <span class="cat-icon">👨‍👩‍👧</span>
+        <span class="cat-title">Family &amp; Personal</span>
+        <span class="cat-desc">Marriage, divorce, inheritance, custody</span>
+      </button>
+      <button class="category-card" data-question="What are my basic rights if I am stopped and questioned by the police?">
+        <span class="cat-icon">⚖️</span>
+        <span class="cat-title">General Legal Information</span>
+        <span class="cat-desc">Rights, procedures, general awareness</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-head">
+      <p class="eyebrow">Simple by design</p>
+      <h2>How It Works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>Ask</h3>
+        <p>Describe your legal situation in normal, everyday language — no legal terms required.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>Understand</h3>
+        <p>NyayaAI explains potentially relevant legal information in simpler language.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>Take Action</h3>
+        <p>Get possible next steps and know when professional help may be needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="features" id="about">
+    <div class="section-head">
+      <p class="eyebrow">Why NyayaAI</p>
+      <h2>Built to make legal information accessible</h2>
+    </div>
+    <ul class="feature-grid">
+      <li>✓ Simple legal language</li>
+      <li>✓ AI-powered assistance</li>
+      <li>✓ Indian legal context</li>
+      <li>✓ Suggested next steps</li>
+      <li>✓ Evidence / document checklist</li>
+      <li>✓ Mobile responsive</li>
+      <li>✓ Privacy-conscious design</li>
+    </ul>
+  </section>
+
+  <!-- ============ DISCLAIMER ============ -->
+  <section class="disclaimer">
+    <div class="disclaimer-card">
+      <span class="disclaimer-icon">🚨</span>
+      <p>
+        <strong>NyayaAI provides general legal information for educational purposes</strong> and does not
+        replace advice from a qualified lawyer or legal professional. Laws can change and individual cases
+        may differ. Please verify important information with official government/legal sources or a
+        qualified professional.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <p>⚖️ NyayaAI — Understand your rights. Know your next step.</p>
+  <p class="footer-note">Built for Hack Devengers 1.0 · General legal information, not legal advice.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
