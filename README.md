@@ -2,7 +2,7 @@
 
 **Understand your rights. Know your next step.**
 
-An AI-powered Indian legal information assistant, built for **Hack Devengers 1.0**.
+An AI-powered Indian legal information assistant.
 
 ---
 
